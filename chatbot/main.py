@@ -1,9 +1,12 @@
 from langchain.prompts import PromptTemplate
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Qdrant
-from langchain_community.llms import CTransformers
+from langchain_community.llms import HuggingFaceHub
+from langchain.chains import LLMChain
 from langchain.chains import RetrievalQA
 from qdrant_client import QdrantClient
+
+HUGGINGFACEHUB_API_TOKEN='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'
 
 custom_prompt_template = """Answer the user's question using the provided information. If you're unsure, refrain from guessing.
 
@@ -33,16 +36,19 @@ def set_custom_prompts():
     return prompt
 
 def load_llm():
-
-    llm = CTransformers(model = '../llama-2-7b-chat.ggmlv3.q8_0.bin',
-                        model_type = 'llama',
-                        max_new_tokens = 512,
-                        temperature = 0.5)
-    
+    print("Loading the language model from Hugging Face Hub...")
+    llm = HuggingFaceHub(
+        repo_id='mistralai/Mixtral-8x7B-Instruct-v0.1',
+        huggingfacehub_api_token=HUGGINGFACEHUB_API_TOKEN,
+        model_kwargs={'temperature':1,"max_length": 64,"max_new_tokens":512},
+        
+    )
+    print("Language model loaded successfully.")
     return llm
 
 def retrival_qa_chain(llm, prompt, db):
-    print(f'{llm},{prompt},{db}')
+    # print(f'{llm},{prompt},{db}')
+    print("Setting up the retrieval-based QA chain...")
     qa_chain = RetrievalQA.from_chain_type(
         llm=llm,
         chain_type='stuff',
@@ -50,10 +56,11 @@ def retrival_qa_chain(llm, prompt, db):
         return_source_documents = True,
         chain_type_kwargs={'prompt': prompt}
     )
-
+    print("Retrieval-based QA chain ready.")
     return qa_chain
 
 def qa_bot():
+    print("Setting up the QA bot...")
     embeddings = HuggingFaceEmbeddings(model_name = 'sentence-transformers/all-MiniLM-L6-v2',
                                        model_kwargs = {'device':'cpu'} )
     
@@ -64,16 +71,33 @@ def qa_bot():
     llm = load_llm()
     qa_prompt = set_custom_prompts()
     qa = retrival_qa_chain(llm, qa_prompt, db)
-
+    print("QA bot ready.")
     return qa
 
 
 def final_result(query):
     qa_result =qa_bot()
     response = qa_result.invoke({'query': query})
+
     return response
+
+def format_output(answer):
+    result = f"**Question:** {answer['query']}\n\n"
+    result += f"**Answer:** {answer['result']}\n\n"
+
+    if 'source_documents' in answer:
+        result += "**Source Documents:**\n"
+        for doc in answer['source_documents']:
+            metadata = doc.metadata
+            result += f"- Page {metadata['page']} from {metadata['source']}\n"
+        result += "\n"
+
+    result += "**Thank You.**"
+    return result
+
 
 if __name__ == '__main__':
     query_from_user = input("Enter your question:")
     answer = final_result(query_from_user)
-    print(answer)
+    cleaned_answer = format_output(answer)
+    print(cleaned_answer)
