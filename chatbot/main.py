@@ -6,7 +6,7 @@ from langchain.chains import LLMChain
 from langchain.chains import RetrievalQA
 from qdrant_client import QdrantClient
 
-# HUGGINGFACEHUB_API_TOKEN='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'
+HUGGINGFACEHUB_API_TOKEN='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'
 
 custom_prompt_template = """Answer the user's question using the provided information. If you're unsure, refrain from guessing.
 
@@ -36,7 +36,7 @@ def set_custom_prompts():
     return prompt
 
 def load_llm():
-    print("Loading the language model from Hugging Face Hub...")
+    print("Loading the language model from Hugging Face Hub...🚀")
     llm = HuggingFaceHub(
         repo_id='mistralai/Mixtral-8x7B-Instruct-v0.1',
         huggingfacehub_api_token=HUGGINGFACEHUB_API_TOKEN,
@@ -48,7 +48,7 @@ def load_llm():
 
 def retrival_qa_chain(llm, prompt, db):
     # print(f'{llm},{prompt},{db}')
-    print("Setting up the retrieval-based QA chain...")
+    print("Setting up the retrieval-based QA chain...🔗")
     qa_chain = RetrievalQA.from_chain_type(
         llm=llm,
         chain_type='stuff',
@@ -60,7 +60,7 @@ def retrival_qa_chain(llm, prompt, db):
     return qa_chain
 
 def qa_bot():
-    print("Setting up the QA bot...")
+    print("Setting up the QA bot ...🤖")
     embeddings = HuggingFaceEmbeddings(model_name = 'sentence-transformers/all-MiniLM-L6-v2',
                                        model_kwargs = {'device':'cpu'} )
     
@@ -82,8 +82,8 @@ def final_result(query):
     return response
 
 def format_output(answer):
-    result = f"**Question:** {answer['query']}\n\n"
-    result += f"**Answer:** {answer['result']}\n\n"
+    result = f"**Question:** {answer['query']} 🤔\n\n"
+    result += f"**Answer:** 💡 {answer['result']} 🙏\n\n"
 
     if 'source_documents' in answer:
         result += "**Source Documents:**\n"
@@ -91,13 +91,23 @@ def format_output(answer):
             metadata = doc.metadata
             result += f"- Page {metadata['page']} from {metadata['source']}\n"
         result += "\n"
+    
+    result += 'This is only generated answer, if you have actual health problems,\n \
+        please consult to an actual health professional.❗ \n'
 
-    result += "**Thank You.**"
     return result
 
+def main():
+    qa_result = qa_bot()
+
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == 'exit':
+            break
+
+        response = qa_result.invoke({'query': user_input})
+        formatted_output = format_output(response)
+        print("Bot:", formatted_output)
 
 if __name__ == '__main__':
-    query_from_user = input("Enter your question:")
-    answer = final_result(query_from_user)
-    cleaned_answer = format_output(answer)
-    print(cleaned_answer)
+    main()
