@@ -20,6 +20,7 @@ Before you begin, ensure you have met the following requirements:
 
 - [Docker](https://docs.docker.com/get-docker/): Make sure Docker is installed on your machine.
 - [Conda](https://docs.conda.io/en/latest/miniconda.html): Preferred for creating a virtual environment. Install Miniconda or Anaconda if you don't have Conda installed.
+- [Huggingfacehub_access_token](https://huggingface.co/docs/hub/en/security-tokens): Obtain your Hugging Face Hub API token. You can create an account on Hugging Face and find your API token in your account settings.
 
 ## Installation
 
@@ -44,7 +45,7 @@ Before you begin, ensure you have met the following requirements:
     ```bash
 
     # Install required packages
-    
+
     ```bash
     pip install -r requirements.txt
     ```bash
@@ -90,6 +91,12 @@ Before you begin, ensure you have met the following requirements:
     ```bash
 
 4. **Run main.py:**
+
+    place your huggingface_api_token in the line 9:
+    ```bash
+    #paste your huggingfacehub_api_token here
+    HUGGINGFACEHUB_API_TOKEN=''
+    ```bash
 
     ```bash
     python main.py
