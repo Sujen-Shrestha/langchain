@@ -1,6 +1,6 @@
 # USMLE First-Aid Chatbot
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Python Version](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 
 This project, built using [LangChain](https://langchain.org/) with [Qdrant](https://qdrant.io/) as the vector database, incorporates the innovative concept of Response-Action-Goal (RAG) for chatbot functionality. Leveraging the power of [Hugging Face](https://huggingface.co/) embeddings and [MistralAI/Mixtral-8x7B-Instruct-v0.1](https://github.com/Mistral-8x7B/Mistral-8x7B-Instruct-v0.1) as its large language model (LLM), the project is designed to provide intelligent responses.
@@ -87,3 +87,7 @@ Before you begin, ensure you have met the following requirements:
     then run the program
     ```bash
     python main.py
+
+## License
+
+This project is licensed under the [Apache License 2.0](LICENSE).
