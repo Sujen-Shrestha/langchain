@@ -1,4 +1,4 @@
-# USMLE First-Aid Chatbot
+### USMLE First-Aid Chatbot
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Python Version](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
@@ -6,13 +6,13 @@
 This project, built using [LangChain](https://langchain.org/) with [Qdrant](https://qdrant.io/) as the vector database, incorporates the innovative concept of Response-Action-Goal (RAG) for chatbot functionality. Leveraging the power of [Hugging Face](https://huggingface.co/) embeddings and [MistralAI/Mixtral-8x7B-Instruct-v0.1](https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1) as its large language model (LLM), the project is designed to provide intelligent responses.
 
 ## Table of Contents
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Documentation](#documentation)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
+- [Prerequisites](###prerequisites)
+- [Installation](###installation)
+- [Usage](###usage)
+- [Documentation](###documentation)
+- [Contributing](###contributing)
+- [License](###license)
+- [Acknowledgments](###acknowledgments)
 
 ## Prerequisites
 
@@ -32,36 +32,39 @@ Before you begin, ensure you have met the following requirements:
 
 2. **Create a Conda Virtual Environment:**
 
-    # Create a virtual environment
+    ### Create a virtual environment
     ```bash
     conda create --name your-environment-name python=3.8.10
     ```
     
-    # Activate the virtual environment
+    ### Activate the virtual environment
     ```bash
     conda activate your-environment-name
     ```
 
-    # Install required packages
-    ``bash
+    ### Install required packages
+    ```bash
     pip install -r requirements.txt
     ```
 
 3. **Set Up Qdrant with Docker:**
-    # Pull Qdrant Docker image
+    ### Pull Qdrant Docker image
     ```bash
     docker pull qdrant/qdrant
+    ```
 
-    # Run Qdrant container
+    ### Run Qdrant container
+    ```bash
     docker run -p 6333:6333 \
         -v $(pwd)/path/to/data:/qdrant/storage \
         qdrant/qdrant
+    ```
 
     Note: The above Docker commands are written for Unix-like systems. Adjust the volume mounting syntax accordingly if you're using Windows.
 
-    #Make sure Qdrant is running before proceeding to the next steps.
+    ###Make sure Qdrant is running before proceeding to the next steps.
     
-    # Confirm Qdrant is running
+    ### Confirm Qdrant is running
     docker ps
 
 ## Usage
@@ -74,23 +77,26 @@ Before you begin, ensure you have met the following requirements:
    
    ```bash
    cd chatbot
+   ```
 
 3. **Run document_ingestion.py:**
 
     ```bash
     python document_ingestion.py
+    ```
 
 4. **Run main.py:**
 
     place your huggingface_api_token in the line 9:
     ```bash
-    #paste your huggingfacehub_api_token here
+    ###paste your huggingfacehub_api_token here
     HUGGINGFACEHUB_API_TOKEN=''
+    ```
 
     then run the program
     ```bash
     python main.py
-
+    ```
 ## License
 
 This project is licensed under the [Apache License 2.0](LICENSE).
