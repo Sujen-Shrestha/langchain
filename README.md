@@ -29,48 +29,37 @@ Before you begin, ensure you have met the following requirements:
    ```bash
    git clone https://github.com/Sujen-Shrestha/langchain.git
    cd your-project
-    ```bash
 
 2. **Create a Conda Virtual Environment:**
 
     # Create a virtual environment
     ```bash
     conda create --name your-environment-name python=3.8.10
-    ```bash
+    
     
     # Activate the virtual environment
-
-    ```bash
     conda activate your-environment-name
-    ```bash
 
     # Install required packages
-
-    ```bash
     pip install -r requirements.txt
-    ```bash
+
 
 3. **Set Up Qdrant with Docker:**
     # Pull Qdrant Docker image
     ```bash
     docker pull qdrant/qdrant
-    ```bash
 
     # Run Qdrant container
-    ```bash
     docker run -p 6333:6333 \
         -v $(pwd)/path/to/data:/qdrant/storage \
         qdrant/qdrant
-    ```bash
 
     Note: The above Docker commands are written for Unix-like systems. Adjust the volume mounting syntax accordingly if you're using Windows.
 
     #Make sure Qdrant is running before proceeding to the next steps.
+    
     # Confirm Qdrant is running
-
-    ```bash
     docker ps
-    ```bash
 
 ## Usage
 
@@ -82,13 +71,11 @@ Before you begin, ensure you have met the following requirements:
    
    ```bash
    cd chatbot
-   ```bash
 
 3. **Run document_ingestion.py:**
 
     ```bash
     python document_ingestion.py
-    ```bash
 
 4. **Run main.py:**
 
@@ -96,8 +83,7 @@ Before you begin, ensure you have met the following requirements:
     ```bash
     #paste your huggingfacehub_api_token here
     HUGGINGFACEHUB_API_TOKEN=''
-    ```bash
 
+    then run the program
     ```bash
     python main.py
-    ```bash
