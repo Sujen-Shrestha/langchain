@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Python Version](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 
-This project, built using [LangChain](https://langchain.org/) with [Qdrant](https://qdrant.io/) as the vector database, incorporates the innovative concept of Response-Action-Goal (RAG) for chatbot functionality. Leveraging the power of [Hugging Face](https://huggingface.co/) embeddings and [MistralAI/Mixtral-8x7B-Instruct-v0.1](https://github.com/Mistral-8x7B/Mistral-8x7B-Instruct-v0.1) as its large language model (LLM), the project is designed to provide intelligent responses.
+This project, built using [LangChain](https://langchain.org/) with [Qdrant](https://qdrant.io/) as the vector database, incorporates the innovative concept of Response-Action-Goal (RAG) for chatbot functionality. Leveraging the power of [Hugging Face](https://huggingface.co/) embeddings and [MistralAI/Mixtral-8x7B-Instruct-v0.1](https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1) as its large language model (LLM), the project is designed to provide intelligent responses.
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
@@ -35,14 +35,17 @@ Before you begin, ensure you have met the following requirements:
     # Create a virtual environment
     ```bash
     conda create --name your-environment-name python=3.8.10
-    
+    ```
     
     # Activate the virtual environment
+    ```bash
     conda activate your-environment-name
+    ```
 
     # Install required packages
+    ``bash
     pip install -r requirements.txt
-
+    ```
 
 3. **Set Up Qdrant with Docker:**
     # Pull Qdrant Docker image
